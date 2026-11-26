@@ -76,6 +76,12 @@
         <p>Associazione di promozione sociale di Caselle in Pittari</p>
       </div>
 
+      <!-- invito a scorrere: compare a sipario aperto e sparisce appena si scende -->
+      <div class="hint" id="hint" aria-hidden="true">
+        <span class="hint__text"><span class="hint__long">Scorri in giù per far partire lo spettacolo</span><span class="hint__short">Scorri in giù</span></span>
+        <svg class="hint__arrow" viewBox="0 0 24 24" width="22" height="22"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
       <svg class="pelmet" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <path d="M0 0H1000V58 Q975 108 950 58 Q925 108 900 58 Q875 108 850 58 Q825 108 800 58 Q775 108 750 58 Q725 108 700 58 Q675 108 650 58 Q625 108 600 58 Q575 108 550 58 Q525 108 500 58 Q475 108 450 58 Q425 108 400 58 Q375 108 350 58 Q325 108 300 58 Q275 108 250 58 Q225 108 200 58 Q175 108 150 58 Q125 108 100 58 Q75 108 50 58 Q25 108 0 58Z" fill="#3E140B"/>
         <path d="M0 52 Q25 100 50 52 Q75 100 100 52 Q125 100 150 52 Q175 100 200 52 Q225 100 250 52 Q275 100 300 52 Q325 100 350 52 Q375 100 400 52 Q425 100 450 52 Q475 100 500 52 Q525 100 550 52 Q575 100 600 52 Q625 100 650 52 Q675 100 700 52 Q725 100 750 52 Q775 100 800 52 Q825 100 850 52 Q875 100 900 52 Q925 100 950 52 Q975 100 1000 52" fill="none" stroke="#E3B04B" stroke-width="3"/>
@@ -102,6 +108,18 @@
         </div>
       </div>
     </div>
+
+    <!-- a che punto siamo: le cinque parti dello spettacolo, cliccabili -->
+    <nav class="acts-bar" id="acts-bar" aria-label="Parti dello spettacolo">
+      <div class="acts-bar__track" aria-hidden="true"><i id="acts-fill"></i></div>
+      <ol>
+        <li><button type="button" data-pt="0.004"><b>1</b><span>Chi siamo</span></button></li>
+        <li><button type="button" data-pt="0.158"><b>2</b><span>Cosa facciamo</span></button></li>
+        <li><button type="button" data-pt="0.308"><b>3</b><span>Il territorio</span></button></li>
+        <li><button type="button" data-pt="0.458"><b>4</b><span>Diventa socio</span></button></li>
+        <li><button type="button" data-pt="0.705"><b>5</b><span>Titoli di coda</span></button></li>
+      </ol>
+    </nav>
 
     <!-- Fine: il sipario si richiude, le luci si abbassano e scorrono i titoli di coda -->
     <div class="dim" id="dim" aria-hidden="true"></div>

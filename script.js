@@ -388,7 +388,29 @@
   };
   const rollY = (pt) => lerp(rollStart, rollEnd, clamp((pt - ROLL[0]) / (ROLL[1] - ROLL[0])));
 
+  const hint = document.getElementById("hint");
+  /* barra delle parti: quattro atti della storia e i titoli di coda */
+  const ACTS = [0, 0.15, 0.3, 0.45, 0.6, 1];
+  const actBtns = [...document.querySelectorAll("#acts-bar button")];
+  const actFill = document.getElementById("acts-fill");
+  let lastAct = -1;
+  function drawActs(pt) {
+    let i = 0;
+    while (i < 4 && pt >= ACTS[i + 1]) i++;
+    const within = clamp((pt - ACTS[i]) / (ACTS[i + 1] - ACTS[i]));
+    actFill.style.width = `${f1(Math.min(100, (i + within) / 4 * 100))}%`;
+    if (i !== lastAct) {
+      actBtns.forEach((b, j) => { b.classList.toggle("is-current", j === i); b.classList.toggle("is-done", j < i); if (j === i) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+      lastAct = i;
+    }
+  }
+  actBtns.forEach((b) => b.addEventListener("click", () => {
+    const top = story.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top + parseFloat(b.dataset.pt) * (story.offsetHeight - window.innerHeight), behavior: reduced ? "auto" : "smooth" });
+  }));
   function drawEnding(pt) {
+    hint.classList.toggle("is-gone", pt > 0.006);
+    drawActs(pt);
     const close = smooth(CLOSE[0], CLOSE[1], pt);
     window.__curtainClose = close;
     theatreEl.classList.toggle("is-closed", close > 0.6);
