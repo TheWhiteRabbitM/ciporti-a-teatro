@@ -1,0 +1,145 @@
+/* CIPorti a teatro? Manifesto teatrale: tre campi di colore a tutto schermo (rosso velluto, nero palco, osso di carta),
+   titoli enormi tagliati dal bordo, un solo momento d'ingresso e la scena che cambia con lo scorrimento. */
+
+@font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces-Display-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces-Display-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("assets/fonts/InstrumentSans-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("assets/fonts/InstrumentSans-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+
+:root {
+  --ink: #17100B;
+  --velvet: #7A2E1D;
+  --velvet-dark: #4A1A10;
+  --bone: #EFE3CC;
+  --gold: #E3B04B;
+  --terra: #B4532A;
+
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --text: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px; --s16: 64px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --edge: max(5vw, env(safe-area-inset-left, 0px));
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--ink); }
+body { margin: 0; background: var(--ink); color: var(--bone); font: 400 19px/1.55 var(--text); }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, p, dl, dd { margin: 0; }
+h1, h2 { font-family: var(--display); font-weight: 600; }
+em { font-style: italic; font-weight: 400; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: var(--s4); top: -64px; z-index: 50; background: var(--gold); color: var(--ink); padding: var(--s2) var(--s4); transition: top 150ms var(--ease); }
+.skip:focus { top: var(--s2); }
+
+/* ---------- barra ---------- */
+.bar { position: fixed; inset: 0 0 auto 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s3) var(--edge); color: var(--bone); transition: background-color 300ms var(--ease); }
+.bar.is-solid { background: #070403; }
+.bar__brand { font: 600 22px/1 var(--display); text-decoration: none; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; gap: 0.25em; }
+.bar__nav { display: flex; align-items: center; gap: var(--s8); }
+.bar__nav a { text-decoration: none; font-weight: 500; font-size: 16px; padding: var(--s2) 0; }
+.bar__nav a:not(.bar__cta) { background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size 220ms var(--ease); }
+.bar__nav a:not(.bar__cta):hover { background-size: 100% 2px; }
+.bar__cta { color: var(--ink); background: var(--gold); padding: var(--s2) var(--s4) !important; transition: background-color 150ms var(--ease), transform 150ms var(--ease); }
+.bar__cta:hover { background: #f0c367; }
+.bar__cta:active { transform: scale(0.98); }
+
+/* ---------- pulsanti ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: var(--s3) var(--s6); border: 2px solid var(--gold); background: var(--gold); color: var(--ink); font: 500 17px/1.2 var(--text); text-decoration: none; transition: background-color 150ms var(--ease), color 150ms var(--ease), transform 150ms var(--ease); }
+.btn:hover { background: transparent; color: var(--gold); }
+.btn:active { transform: scale(0.98); }
+.btn--line { background: transparent; border-color: currentColor; color: inherit; }
+.btn--line:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+.btn--dark { background: var(--ink); border-color: var(--ink); color: var(--bone); }
+.btn--dark:hover { background: transparent; color: var(--ink); }
+
+/* ---------- il teatro: sipario, scenetta delle ombre e sopratitoli ---------- */
+.theatre { position: relative; height: 1270svh; background: #0B0705; color: var(--bone); }
+.theatre__sticky { position: sticky; top: 0; height: 100svh; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.theatre__stage { position: relative; min-height: 0; overflow: hidden; background: #0B0705; isolation: isolate; }
+#stage { position: absolute; inset: 0; width: 100%; height: 100%; }
+#curtain { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+.curtain { position: absolute; top: 0; bottom: 0; width: 53%; z-index: 3; background: repeating-linear-gradient(90deg, var(--velvet) 0 36px, #8E3825 36px 52px, #64261A 52px 88px); transition: transform 3400ms cubic-bezier(0.65, 0, 0.2, 1) 1600ms; }
+.curtain--l { left: 0; transform-origin: left center; }
+.curtain--r { right: 0; transform-origin: right center; }
+.is-open .curtain { transform: scaleX(0.09); }
+.gl .curtain { display: none; }
+
+.crest { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: var(--s4); padding: 96px var(--edge) var(--s8); text-align: center; pointer-events: none; transition: opacity 700ms var(--ease) 1300ms; }
+.crest img { width: clamp(110px, 15vw, 220px); height: auto; }
+.crest h1 { font-size: clamp(48px, 8.4vw, 140px); line-height: 0.9; letter-spacing: -0.02em; text-shadow: 0 2px 0 rgb(0 0 0 / 0.25); }
+.crest h1 em { color: var(--gold); }
+.crest p { font-size: clamp(17px, 1.5vw, 22px); color: rgb(239 227 204 / 0.85); }
+.is-open .crest { opacity: 0; }
+.is-open .theatre.is-closed .crest { opacity: 1; transition-delay: 600ms; }
+
+.pelmet { position: absolute; top: 0; left: 0; width: 100%; height: clamp(64px, 9vw, 104px); z-index: 5; }
+
+.theatre__band { position: relative; background: #0B0705; border-top: 6px solid var(--velvet-dark); padding: var(--s8) var(--edge) var(--s6); min-height: clamp(150px, 23svh, 230px); display: grid; align-items: center; }
+.lights { position: absolute; left: 0; right: 0; top: -21px; display: flex; justify-content: space-between; padding: 0 var(--edge); }
+.lights i { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); border: 3px solid var(--velvet-dark); opacity: 0; transition: opacity 400ms var(--ease); transition-delay: calc(3600ms + var(--i) * 70ms); }
+.is-open .lights i { opacity: 1; }
+.subs { display: grid; width: 100%; max-width: 64ch; margin: 0 auto; text-align: center; }
+.sub { grid-area: 1 / 1; opacity: 0; transform: translateY(var(--s2)); pointer-events: none; transition: opacity 400ms var(--ease), transform 400ms var(--ease); }
+.sub.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.sub h2 { font: italic 400 clamp(20px, 1.8vw, 28px)/1.1 var(--display); color: var(--gold); margin: 0 0 var(--s2); }
+.sub p { font-size: clamp(18px, 1.6vw, 24px); line-height: 1.45; margin: 0 auto; max-width: 56ch; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s4); }
+
+/* ---------- finale: sipario chiuso, luci basse, titoli di coda ---------- */
+.dim { position: absolute; inset: 0; z-index: 6; background: #050302; opacity: 0; pointer-events: none; }
+.credits { position: absolute; inset: 0; z-index: 7; overflow: hidden; pointer-events: none; visibility: hidden;
+  -webkit-mask: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
+          mask: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); }
+.credits.is-on { visibility: visible; pointer-events: auto; }
+.roll { position: absolute; left: 0; right: 0; top: 0; padding: 0 var(--edge); text-align: center; will-change: transform; }
+.cr { max-width: 760px; margin: 0 auto; padding: clamp(56px, 11svh, 120px) 0 0; }
+.cr__head { font: 500 13px/1.2 var(--text); letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 var(--s6); }
+.cr__fine { font: italic 400 clamp(40px, 6vw, 88px)/1 var(--display); color: var(--bone); }
+.cr__sub { margin-top: var(--s4); font-size: clamp(17px, 1.4vw, 20px); color: rgb(239 227 204 / 0.7); }
+.cr__star { display: block; font: 600 clamp(30px, 3.6vw, 52px)/1.08 var(--display); letter-spacing: -0.01em; color: var(--bone); }
+.cr__note { font-size: clamp(17px, 1.4vw, 20px); color: rgb(239 227 204 / 0.82); max-width: 46ch; margin: 0 auto; }
+.cr__rows { display: grid; gap: var(--s4); }
+.cr__rows div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s8); align-items: baseline; }
+.cr__rows dt { text-align: right; font: italic 400 clamp(18px, 1.6vw, 22px)/1.3 var(--display); color: rgb(239 227 204 / 0.62); }
+.cr__rows dd { text-align: left; font: 500 clamp(18px, 1.6vw, 22px)/1.4 var(--text); color: var(--bone); }
+.cr__rows a { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.cr__rows a:hover { color: var(--gold); }
+.cr__loc { margin: 0 auto; display: grid; justify-items: center; gap: var(--s4); }
+.cr__loc img { width: min(400px, 76vw); height: min(270px, 51vw); object-fit: cover; object-position: 50% 58%; filter: sepia(0.25) contrast(1.05) brightness(0.92); box-shadow: 0 0 0 1px rgb(227 176 75 / 0.4), 0 24px 60px rgb(0 0 0 / 0.6); }
+.cr__loc figcaption { display: grid; gap: var(--s1); font-size: clamp(16px, 1.3vw, 19px); color: rgb(239 227 204 / 0.7); }
+.cr .actions { margin-top: var(--s6); }
+.cr--small .cr__rows dt, .cr--small .cr__rows dd { font-size: 15px; }
+.cr--end { padding-bottom: 40svh; display: grid; justify-items: center; gap: var(--s4); }
+.cr--end img { width: clamp(110px, 12vw, 170px); height: auto; }
+.cr__title { font: 600 clamp(44px, 6.4vw, 104px)/0.92 var(--display); letter-spacing: -0.02em; color: var(--bone); }
+.cr__title em { color: var(--gold); }
+
+/* ---------- schermi medi: il menu completo non ci sta ---------- */
+@media (max-width: 1080px) { .bar__nav a:not(.bar__cta) { display: none; } }
+
+/* ---------- schermi stretti ---------- */
+@media (max-width: 860px) {
+  body { font-size: 18px; }
+  .bar__nav a:not(.bar__cta) { display: none; }
+  .bar__brand { font-size: 19px; }
+  .theatre { height: 1200svh; }
+  .theatre__band { min-height: 210px; padding-top: var(--s6); }
+  .sub p { font-size: 17px; }
+  .crest h1 { font-size: clamp(44px, 14vw, 72px); }
+  .cr__rows div { grid-template-columns: 1fr; gap: 2px; }
+  .cr__rows dt, .cr__rows dd { text-align: center; }
+  .cr__rows dd { overflow-wrap: anywhere; }
+}
+
+/* ---------- niente movimento: sipario gia' aperto ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .curtain, .crest, .lights i, .sub, .bar { transition: none !important; }
+  .curtain { transform: scaleX(0.09); }
+  .lights i { opacity: 1; }
+  .crest { opacity: 0; }
+}

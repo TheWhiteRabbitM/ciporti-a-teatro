@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CIPorti a teatro? Associazione di promozione sociale, Caselle in Pittari</title>
+<meta name="description" content="CIPorti a teatro? è un'associazione di promozione sociale di Caselle in Pittari (SA): educazione, cura dell'ambiente e del territorio, con il lavoro volontario dei soci.">
+<meta name="theme-color" content="#0B0705">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/Fraunces-Display-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#contenuto">Vai al contenuto</a>
+
+<header class="bar" id="bar">
+  <a class="bar__brand" href="#top" aria-label="CIPorti a teatro?, torna in cima">CIPorti <em>a teatro?</em></a>
+  <nav class="bar__nav" aria-label="Sezioni">
+    <a href="#storia" data-p="0.02">Chi siamo</a>
+    <a href="#storia" data-p="0.27">Cosa facciamo</a>
+    <a href="#storia" data-p="0.53">Il territorio</a>
+    <a href="#appuntamenti" data-credit>Appuntamenti</a>
+    <a href="#contatti" data-credit>Contatti</a>
+    <a class="bar__cta" href="#socio" data-credit>Diventa socio</a>
+  </nav>
+</header>
+
+<main id="contenuto">
+
+<!-- Il teatro: il sipario si apre sulla scenetta delle ombre; i testi scorrono come sopratitoli sotto il palco -->
+<section class="theatre" id="storia" aria-labelledby="titolo">
+  <div class="theatre__sticky" id="top">
+    <div class="theatre__stage" id="stagewrap">
+      <svg id="stage" viewBox="0 0 1000 540" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Teatrino disegnato a mano: cinque bambini entrano in scena, leggono, spazzano le foglie, osservano un fiore, camminano verso la torre del paese e si inchinano.">
+        <defs>
+          <radialGradient id="lamp" gradientUnits="userSpaceOnUse" cx="500" cy="230" r="640">
+            <stop offset="0" stop-color="#5A2216"/>
+            <stop offset="0.45" stop-color="#2E0F09"/>
+            <stop offset="1" stop-color="#0E0503"/>
+          </radialGradient>
+          <radialGradient id="spotg" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#F7DFA6" stop-opacity="0.32"/>
+            <stop offset="1" stop-color="#F7DFA6" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="far" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="0.6"/></filter>
+          <!-- tratto a mano che trema: il seme del rumore cambia da script.js -->
+          <filter id="boil" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence id="boil-n" type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="1" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4"/></filter>
+        </defs>
+
+        <rect x="-1000" y="-1200" width="3000" height="1740" fill="url(#lamp)"/>
+        <ellipse id="spot" cx="500" cy="330" rx="150" ry="250" fill="url(#spotg)" opacity="0"/>
+
+        <!-- piano lontano: il paese -->
+        <!-- piano lontano: Caselle in Pittari sulla collina, disegnato da script.js -->
+        <g id="borgo" fill="#1A0906" stroke="#EFE3CC" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.6"></g>
+        <g id="collina" opacity="0"></g>
+
+        <g filter="url(#boil)" stroke-linecap="round" stroke-linejoin="round">
+          <g id="birds" fill="none" stroke="#EFE3CC" stroke-width="2.6" opacity="0"></g>
+          <g id="flower" fill="#1A0906" stroke="#EFE3CC" stroke-width="2.4" opacity="0"></g>
+          <g id="leaves" fill="#1A0906" stroke="#E3B04B" stroke-width="1.8"></g>
+          <rect x="-20" y="521" width="1040" height="30" fill="#0E0503" stroke="none"/>
+          <path d="M-10 522 Q250 518 500 522 T1010 521" fill="none" stroke="#EFE3CC" stroke-width="2.6"/>
+          <g id="pups" fill="#1A0906" stroke="#EFE3CC" stroke-width="2.2"></g>
+        </g>
+        <rect id="flicker" x="-1000" y="-1200" width="3000" height="1740" fill="#000" opacity="0"/>
+      </svg>
+
+      <div class="curtain curtain--l" aria-hidden="true"></div>
+      <div class="curtain curtain--r" aria-hidden="true"></div>
+      <canvas id="curtain" aria-hidden="true"></canvas>
+
+      <div class="crest" id="crest">
+        <img src="assets/simbolo-negativo.svg" alt="" width="200" height="188">
+        <h1 id="titolo">CIPorti <em>a teatro?</em></h1>
+        <p>Associazione di promozione sociale di Caselle in Pittari</p>
+      </div>
+
+      <svg class="pelmet" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M0 0H1000V58 Q975 108 950 58 Q925 108 900 58 Q875 108 850 58 Q825 108 800 58 Q775 108 750 58 Q725 108 700 58 Q675 108 650 58 Q625 108 600 58 Q575 108 550 58 Q525 108 500 58 Q475 108 450 58 Q425 108 400 58 Q375 108 350 58 Q325 108 300 58 Q275 108 250 58 Q225 108 200 58 Q175 108 150 58 Q125 108 100 58 Q75 108 50 58 Q25 108 0 58Z" fill="#3E140B"/>
+        <path d="M0 52 Q25 100 50 52 Q75 100 100 52 Q125 100 150 52 Q175 100 200 52 Q225 100 250 52 Q275 100 300 52 Q325 100 350 52 Q375 100 400 52 Q425 100 450 52 Q475 100 500 52 Q525 100 550 52 Q575 100 600 52 Q625 100 650 52 Q675 100 700 52 Q725 100 750 52 Q775 100 800 52 Q825 100 850 52 Q875 100 900 52 Q925 100 950 52 Q975 100 1000 52" fill="none" stroke="#E3B04B" stroke-width="3"/>
+        <rect y="0" width="1000" height="10" fill="#E3B04B"/>
+      </svg>
+    </div>
+
+    <div class="theatre__band">
+      <div class="lights" id="lights" aria-hidden="true"></div>
+      <div class="subs" id="subs">
+        <div class="sub is-on" data-from="0" data-to="0.12"><h2>Chi siamo</h2><p>CIPorti a teatro? è un'associazione di promozione sociale di Caselle in Pittari, costituita l'11 marzo 2026.</p></div>
+        <div class="sub" data-from="0.12" data-to="0.25"><h2>Chi siamo</h2><p>Non ha fini di lucro, è apartitica e aconfessionale, e vive del lavoro volontario dei suoi soci.</p></div>
+        <div class="sub" data-from="0.25" data-to="0.312"><h2>Cosa facciamo</h2><p>Educazione, istruzione e formazione.</p></div>
+        <div class="sub" data-from="0.312" data-to="0.375"><h2>Cosa facciamo</h2><p>Cura dell'ambiente e delle risorse naturali.</p></div>
+        <div class="sub" data-from="0.375" data-to="0.437"><h2>Cosa facciamo</h2><p>Giornate ecologiche e recupero di aree abbandonate.</p></div>
+        <div class="sub" data-from="0.437" data-to="0.5"><h2>Cosa facciamo</h2><p>Visite guidate e percorsi per tutti.</p></div>
+        <div class="sub" data-from="0.5" data-to="0.625"><h2>Il territorio</h2><p>Promuoviamo il territorio valorizzando le persone e le sue ricchezze, e lo tuteliamo curando le aree abbandonate, con il coinvolgimento diretto della comunità.</p></div>
+        <div class="sub" data-from="0.625" data-to="0.75"><h2>Il territorio</h2><p>Contribuiamo a formare una nuova cultura ambientale, perché il territorio sia fruibile da tutti senza essere deturpato.</p></div>
+        <div class="sub" data-from="0.75" data-to="1.01"><h2>Diventa socio</h2><p>Si aderisce come socio ordinario con una domanda al Consiglio Direttivo.</p>
+          <div class="actions">
+            <a class="btn" href="assets/moduli/domanda-adesione-socio.pdf" download>Scarica il modulo</a>
+            <a class="btn btn--line" href="assets/moduli/domanda-adesione-socio.docx" download>Versione Word</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fine: il sipario si richiude, le luci si abbassano e scorrono i titoli di coda -->
+    <div class="dim" id="dim" aria-hidden="true"></div>
+    <div class="credits" id="credits">
+      <div class="roll" id="roll">
+        <section class="cr cr--open">
+          <p class="cr__fine">Fine del primo atto</p>
+          <p class="cr__sub">Il resto lo scriviamo insieme.</p>
+        </section>
+
+        <section class="cr">
+          <h2 class="cr__head">Con la partecipazione di</h2>
+          <p class="cr__star">i soci e i volontari<br>di Caselle in Pittari</p>
+        </section>
+
+        <section class="cr" id="principi">
+          <h2 class="cr__head">Come lavoriamo</h2>
+          <dl class="cr__rows">
+            <div><dt>Democratica</dt><dd>Le cariche sono elettive e le decisioni passano dall'Assemblea dei soci.</dd></div>
+            <div><dt>Trasparente</dt><dd>L'amministrazione è trasparente, anche sul piano fiscale.</dd></div>
+            <div><dt>Gratuita</dt><dd>I soci prestano la loro opera in modo spontaneo, gratuito e solidale.</dd></div>
+          </dl>
+        </section>
+
+        <section class="cr" id="appuntamenti">
+          <h2 class="cr__head">Prossimamente</h2>
+          <dl class="cr__rows" id="events-list"></dl>
+          <p class="cr__note" id="events-empty" hidden>Nuovi spettacoli e giornate in preparazione.<br>Per sapere quando, scrivici o chiamaci.</p>
+        </section>
+
+        <section class="cr" id="paese">
+          <h2 class="cr__head">Girato a</h2>
+          <figure class="cr__loc">
+            <img src="assets/foto/caselle-in-pittari.jpg" width="960" height="1280" alt="Il paese di Caselle in Pittari sulla collina, con la torre in cima e le montagne del Cilento" decoding="async">
+            <figcaption><span class="cr__star">Caselle in Pittari</span><span>Cilento, provincia di Salerno, 444 m sul mare</span></figcaption>
+          </figure>
+        </section>
+
+        <section class="cr" id="contatti">
+          <h2 class="cr__head">Contatti</h2>
+          <dl class="cr__rows">
+            <div><dt>Sede</dt><dd>Via Nazionale, n. 42<br>84030 Caselle in Pittari (SA)<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Nazionale+42+Caselle+in+Pittari" target="_blank" rel="noopener">Apri la mappa</a></dd></div>
+            <div><dt>Telefono</dt><dd><a href="tel:+393482974991">+39 348 297 4991</a></dd></div>
+            <div><dt>PEC</dt><dd><a href="mailto:ciportiateatro@pec.it">ciportiateatro@pec.it</a></dd></div>
+            <div><dt>Codice fiscale</dt><dd>93050770655</dd></div>
+          </dl>
+        </section>
+
+        <section class="cr" id="socio">
+          <h2 class="cr__head">Cercasi attori, tecnici e spettatori</h2>
+          <p class="cr__note">Si aderisce come socio ordinario con una domanda al Consiglio Direttivo.</p>
+          <div class="actions">
+            <a class="btn" href="assets/moduli/domanda-adesione-socio.pdf" download>Scarica il modulo</a>
+            <a class="btn btn--line" href="assets/moduli/domanda-adesione-socio.docx" download>Versione Word</a>
+          </div>
+        </section>
+
+        <section class="cr cr--small">
+          <dl class="cr__rows">
+            <div><dt>Fotografia</dt><dd><a href="https://commons.wikimedia.org/wiki/File:Caselle_in_Pittari.jpg" target="_blank" rel="noopener">Geofix</a>, licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.it" target="_blank" rel="noopener">CC BY-SA 3.0</a>, ritagliata</dd></div>
+            <div><dt>Caratteri</dt><dd>Fraunces e Instrument Sans</dd></div>
+          </dl>
+        </section>
+
+        <section class="cr cr--end" id="fine">
+          <img src="assets/simbolo-negativo.svg" alt="" width="200" height="188">
+          <p class="cr__title">CIPorti <em>a teatro?</em></p>
+          <p class="cr__sub">Associazione di promozione sociale</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="events.js"></script>
+<script src="curtain.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
