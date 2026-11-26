@@ -455,13 +455,16 @@
   if (!reduced) setTimeout(() => { if (!touched && storyProgress() < 0.004) play(); }, 5600);
   setCtl();
   ctl.classList.add("is-on");
-  function autoPlay(pt, dt) {
-    if (!playing || dt <= 0) return;
-    if (pt >= ROLL[1] - 0.001) { playing = false; ended = true; setCtl(); return; }
+  /* l'automatico avanza su un valore decimale (niente salti di pixel) e la pagina lo segue */
+  let autoPt = null;
+  function autoPlay(dt) {
+    if (!playing) { autoPt = null; return null; }
+    if (autoPt === null) autoPt = storyProgress();
+    autoPt = Math.min(ROLL[1], autoPt + SPEED(autoPt) * dt);
+    if (autoPt >= ROLL[1] - 0.0005) { playing = false; ended = true; setCtl(); }
     const span = story.offsetHeight - window.innerHeight;
-    scrollCarry += SPEED(pt) * span * dt;
-    const step = Math.floor(scrollCarry);
-    if (step >= 1) { scrollCarry -= step; window.scrollBy({ top: step, behavior: "instant" }); }
+    window.scrollTo({ top: Math.round(story.offsetTop + autoPt * span), behavior: "instant" });
+    return autoPt;
   }
 
   function drawEnding(pt) {
@@ -484,15 +487,17 @@
   const boil = document.getElementById("boil-n");
   let boilSeed = 1, boilAt = 0;
 
-  let lastT = null;
+  let lastT = null, shownPt = null;
   function render(now) {
-    if (boil && !reduced && now - boilAt > 140) { boilSeed = (boilSeed % 5) + 1; boil.setAttribute("seed", boilSeed); boilAt = now; }
     const t = reduced ? 0 : now / 1000;
     const dt = lastT === null ? 0.016 : Math.min(0.1, Math.max(0, t - lastT));
     lastT = t;
-    const pt = storyProgress();
+    /* la scena segue lo scorrimento con un leggero ritardo morbido: la rotella non fa piu' saltare i personaggi */
+    const target = autoPlay(dt) ?? storyProgress();
+    if (shownPt === null || reduced || Math.abs(target - shownPt) > 0.08) shownPt = target;
+    else shownPt += (target - shownPt) * (1 - Math.exp(-dt * 6));
+    const pt = shownPt;
     drawEnding(pt);
-    autoPlay(pt, dt);
     const p = clamp(pt / STORY);
     const cur = subs.find((s) => p >= s.from && p < s.to) || subs[subs.length - 1];
     if (cur !== lastSub) { subs.forEach((s) => s.el.classList.toggle("is-on", s === cur)); lastSub = cur; }
