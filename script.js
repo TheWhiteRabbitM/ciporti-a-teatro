@@ -521,11 +521,16 @@
   const fitStage = () => {
     const r = svgStage.getBoundingClientRect();
     const ratio = r.width / Math.max(1, r.height);
-    const narrow = ratio < 1.45;
-    /* sul telefono inquadra solo la fascia in cui recitano i bambini, cosi' sono piu' grandi */
-    svgStage.setAttribute("viewBox", ratio < 0.9 ? "130 160 830 400" : narrow ? "60 0 880 540" : "0 0 1000 540");
-    svgStage.setAttribute("preserveAspectRatio", narrow ? "xMidYMax meet" : "xMidYMax slice");
+    /* telefono: solo la fascia dei bambini; schermo stretto: tutta la scena; schermo molto largo e basso:
+       si mostra sempre dall'altezza delle teste in giu' (niente teste tagliate), allargando il fondale ai lati */
+    let vb = "0 0 1000 540", par = "xMidYMax slice";
+    if (ratio < 0.9) { vb = "130 160 830 400"; par = "xMidYMax meet"; }
+    else if (ratio < 1.45) { vb = "60 0 880 540"; par = "xMidYMax meet"; }
+    else if (ratio > 1000 / 440) { vb = "0 100 1000 440"; par = "xMidYMax meet"; }
+    if (svgStage.getAttribute("viewBox") !== vb) svgStage.setAttribute("viewBox", vb);
+    if (svgStage.getAttribute("preserveAspectRatio") !== par) svgStage.setAttribute("preserveAspectRatio", par);
   };
+  if ("ResizeObserver" in window) new ResizeObserver(fitStage).observe(svgStage);
   fitStage();
   measureRoll();
   window.addEventListener("resize", () => { fitStage(); measureRoll(); });
