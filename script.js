@@ -47,6 +47,8 @@
     book: `<g class="pr pr-book">${PC("M-1 18L19 10L22 32L2 40Z", CREAM)}${PC("M-1 18L-16 14L-13 34L2 40Z", "#F6E7C8")}<path d="M3 22L17 16M4 27L18 21M5 32L19 26M-3 21L-12 18M-3 26L-11 23" fill="none" stroke="#9E8A70" stroke-width="1.4"/></g>`,
     broom: `<g class="pr pr-broom"><path d="M0 2L0 98" stroke="${INK}" stroke-width="2.6"/>${PC("M-15 124L15 124L7 98L-7 98Z", "#D9A441")}<path d="M-5 102L-8 121M0 102L0 121M5 102L8 121" fill="none" stroke="#8C6420" stroke-width="1.4"/><rect x="-8" y="95" width="16" height="5" fill="#B4532A"/></g>`,
     mag: `<g class="pr pr-mag"><path d="M0 28L0 46" stroke="${INK}" stroke-width="2.8"/><circle cx="0" cy="60" r="13" fill="#BFE0E8" fill-opacity="0.55" stroke="${INK}" stroke-width="2.8"/>${cut("M-6 54Q-3 51 1 51", 1.4)}</g>`,
+    can: `<g class="pr pr-can"><path d="M14 30L28 22" stroke="${INK}" stroke-width="3"/>${PC("M-8 28L14 28L12 50L-6 50Z", "#2E8A99")}<path d="M-8 32Q-18 38 -8 46" fill="none" stroke="${INK}" stroke-width="2.4"/>`
+      + [0, 1, 2].map((i) => `<circle class="drop" data-i="${i}" cx="30" cy="22" r="1.8" fill="#BFE0E8" stroke="none"/>`).join("") + `</g>`,
     wand: `<g class="pr pr-wand"><path d="M0 28L0 58" stroke="${INK}" stroke-width="2.2"/>${star(0, 68, 1.05, LIGHT)}</g>`,
   };
 
@@ -93,15 +95,15 @@
   /* il copione: posizioni sul palco nel corso della storia (p da 0 a 1) e verso in cui guardano da fermi */
   const KIDS = [
     { id: "mia", skin: "#F1C29B", s: 1.4, ph: 0.3, hair: HAIR.pony, torso: BODY.mia, girl: true, propsF: PROPS.broom,
-      keys: [[0, 190], [0.26, 190], [0.35, 675], [0.5, 675], [0.56, 220], [1, 220]], intro: -360, delay: 0.9, face: { A: 1, B: 1, C: 1, D: 1 } },
+      keys: [[0, 190], [0.12, 190], [0.15, 260], [0.25, 260], [0.27, 300], [0.312, 300], [0.33, 220], [0.375, 220], [0.395, 620], [0.437, 620], [0.455, 300], [0.5, 300], [0.56, 220], [1, 220]], intro: -360, delay: 0.9, faces: [1, 1, 1, 1, 1, 1, 1, 1, 1] },
     { id: "teo", skin: "#D9A07A", s: 1.44, ph: 1.1, hair: HAIR.cap, torso: BODY.teo, propsF: PROPS.mask + PROPS.book,
-      keys: [[0, 300], [0.25, 300], [0.29, 260], [0.5, 260], [0.56, 340], [1, 340]], intro: -460, delay: 0.3, face: { A: 1, B: 1, C: 1, D: 1 } },
+      keys: [[0, 300], [0.12, 300], [0.15, 370], [0.25, 370], [0.27, 500], [0.312, 500], [0.33, 420], [0.375, 420], [0.395, 400], [0.437, 400], [0.455, 500], [0.5, 500], [0.56, 340], [1, 340]], intro: -460, delay: 0.3, faces: [1, 1, 1, 1, 1, 1, 1, 1, 1] },
     { id: "sole", skin: "#EDB990", s: 1.36, ph: 2.0, hair: HAIR.curls, back: RAYS, torso: BODY.sole, girl: true,
-      keys: [[0, 660], [0.26, 660], [0.33, 360], [0.5, 360], [0.56, 460], [1, 460]], intro: 480, delay: 0.6, face: { A: -1, B: -1, C: 1, D: 1 } },
-    { id: "bea", skin: "#F4CDAA", s: 1.46, ph: 2.7, hair: HAIR.bob, front: CROWN, behind: CAPE, torso: BODY.bea, girl: true, propsF: PROPS.mag + PROPS.wand,
-      keys: [[0, 520], [0.5, 520], [0.56, 580], [1, 580]], intro: -680, delay: 0, face: { A: 1, B: 1, C: 1, D: 1 } },
-    { id: "leo", skin: "#C98B62", s: 1.5, ph: 3.6, hair: HAIR.tree, torso: BODY.leo,
-      keys: [[0, 830], [0.5, 830], [0.57, 700], [1, 700]], intro: 360, delay: 1.2, face: { A: -1, B: -1, C: 1, D: 1 } },
+      keys: [[0, 660], [0.12, 660], [0.15, 480], [0.25, 480], [0.27, 390], [0.312, 390], [0.33, 320], [0.375, 320], [0.395, 300], [0.437, 300], [0.455, 400], [0.5, 400], [0.56, 460], [1, 460]], intro: 480, delay: 0.6, faces: [-1, 1, 1, 1, 1, 1, 1, 1, 1] },
+    { id: "bea", skin: "#F4CDAA", s: 1.46, ph: 2.7, hair: HAIR.bob, front: CROWN, behind: CAPE, torso: BODY.bea, girl: true, propsF: PROPS.wand,
+      keys: [[0, 520], [0.12, 520], [0.15, 590], [0.25, 590], [0.27, 620], [0.312, 620], [0.33, 520], [0.375, 520], [0.395, 490], [0.437, 490], [0.455, 720], [0.5, 720], [0.56, 580], [1, 580]], intro: -680, delay: 0, faces: [1, 1, -1, 1, 1, -1, 1, 1, 1] },
+    { id: "leo", skin: "#C98B62", s: 1.5, ph: 3.6, hair: HAIR.tree, torso: BODY.leo, propsF: PROPS.can,
+      keys: [[0, 830], [0.12, 830], [0.15, 700], [0.25, 700], [0.27, 720], [0.312, 720], [0.33, 780], [0.375, 780], [0.395, 820], [0.437, 820], [0.455, 600], [0.5, 600], [0.57, 700], [1, 700]], intro: 360, delay: 1.2, faces: [-1, -1, -1, -1, -1, 1, 1, 1, 1] },
   ];
 
   const pupSVG = (k) => `<g class="pup" id="pup-${k.id}"><g class="legs">${leg("legB")}${leg("legF")}</g><g class="upper">${ROD}${k.behind || ""}${arm("armB", "", k.skin)}${k.torso}${head(k.hair, k.back, k.front, k.skin)}${arm("armF", k.propsF, k.skin)}</g></g>`;
@@ -185,7 +187,8 @@
       el, legs: q(".legs"), upper: q(".upper"), head: q(".head"), eye: q(".eye"),
       legF: q(".legF"), legB: q(".legB"), shinF: q(".legF .shin"), shinB: q(".legB .shin"),
       armF: q(".armF"), armB: q(".armB"), foreF: q(".armF .fore"), foreB: q(".armB .fore"),
-      pr: { mask: q(".pr-mask"), book: q(".pr-book"), mag: q(".pr-mag"), wand: q(".pr-wand") },
+      pr: { mask: q(".pr-mask"), book: q(".pr-book"), wand: q(".pr-wand"), can: q(".pr-can") },
+      drops: [...el.querySelectorAll(".drop")],
       maskFace: q(".maskface"),
       phase: 0, mv: 0, lastX: null, dir: 1,
     });
@@ -231,6 +234,22 @@
   };
   const HANDS = { shF: 72, elF: 4, shB: -58, elB: 4 };
 
+  /* le battute seguono i sopratitoli: 0 arrivo e saluto, 1 volontari (tutti alzano la mano), 2 educazione (Teo legge,
+     gli altri seduti ascoltano), 3 ambiente (Leo annaffia il fiore), 4 giornate ecologiche (Mia spazza le foglie),
+     5 visite guidate (Bea fa da guida), 6-7 cammino verso il paese, 8 diventa socio (mano nella mano e inchino) */
+  const BEATS = [0, 0.12, 0.25, 0.312, 0.375, 0.437, 0.5, 0.625, 0.75, 1.01];
+  const beatWeights = (p) => BEATS.slice(0, 9).map((a, i) => smooth(a - 0.012, a + 0.012, p) * (1 - smooth(BEATS[i + 1] - 0.012, BEATS[i + 1] + 0.012, p)));
+  const beatAt = (p) => { let i = 0; while (i < 8 && p >= BEATS[i + 1]) i++; return i; };
+  const SIT = { hipF: 84, kneeF: 118, hipB: 74, kneeB: 120, bob: -36, lean: 4, shF: 22, elF: 50, shB: 18, elB: 40, nod: 8 };
+  const LOOK = { nod: 6, shF: 14, elF: 30, shB: -14, elB: 30 };
+  const BEAT = {
+    1: (k, t) => (k.id === "leo" ? { shF: 160 + 6 * sn(t, 5, 0), elF: 6, shB: 150 + 6 * sn(t, 5, 1), elB: 6 } : { shF: 162 + 8 * sn(t, 6, k.ph), elF: 6 + 10 * sn(t, 6, k.ph), nod: -4 }),
+    2: (k, t) => (k.id === "teo" ? { shF: 76, elF: 72, shB: 42, elB: 62, nod: 14 + 4 * sn(t, 3, 0), lean: 3 } : SIT),
+    3: (k, t) => (k.id === "leo" ? { shF: 66 + 4 * sn(t, 2, 0), elF: 16, lean: 10, nod: 16 } : LOOK),
+    4: (k, t) => (k.id === "mia" ? { shF: 30 + 16 * sn(t, 5, 0), elF: 18, shB: 46 + 16 * sn(t, 5, 0), elB: 30, lean: 16 } : { ...LOOK, nod: 2 }),
+    5: (k, t) => (k.id === "bea" ? { shF: 150 + 8 * sn(t, 3, 0), elF: 10, shB: 60, elB: 70, nod: -6 } : { nod: -8, shF: 20, elF: 20 }),
+  };
+
   const set = (el, v) => el.setAttribute("transform", v);
   const f1 = (n) => n.toFixed(2);
 
@@ -245,16 +264,16 @@
     const moving = Math.abs(dx) > 0.15 && !reduced ? 1 : 0;
     k.mv = lerp(k.mv, Math.max(moving, walkInPlace), reduced ? 1 : clamp(dt * 9));
     if (moving) k.dir = Math.sign(dx);
-    else k.dir = k.face[p < 0.25 ? "A" : p < 0.5 ? "B" : p < 0.75 ? "C" : "D"];
+    else k.dir = k.faces[beatAt(p)];
     if (!reduced) k.phase += Math.abs(dx) / 30 * PI + walkInPlace * dt * 7.5;
 
     /* posa della scena, mescolata tra scene vicine */
     const acts = ACT[k.id](t, k.ph);
     const pose = { ...NEUTRAL };
     const mix = (src, w) => { if (!src || w <= 0) return; for (const n in src) pose[n] += (src[n] - NEUTRAL[n]) * w; };
-    mix(acts.A, W.A);
-    mix(acts.B, W.B);
-    mix(HANDS, W.D);
+    mix(acts.A, W.bw[0]);
+    for (let b = 1; b <= 5; b++) if (W.bw[b] > 0) mix(BEAT[b](k, t), W.bw[b]);
+    mix(HANDS, W.bw[8]);
     const bow = Math.sin(PI * clamp((p - 0.86) / 0.09));
     /* inchino da figure frontali: si piegano sulle ginocchia e abbassano la testa, senza cadere di lato */
     pose.lean += 6 * bow;
@@ -294,10 +313,11 @@
     set(k.eye, `translate(2 -151) scale(1 ${f1(blink)}) translate(-2 151)`);
 
     const show = (el, v) => { if (el) el.setAttribute("opacity", f1(clamp(v))); };
-    show(k.pr.mask, W.A);
-    show(k.pr.book, W.B);
-    show(k.pr.mag, W.B);
-    show(k.pr.wand, W.A + W.C + W.D);
+    show(k.pr.mask, W.bw[0]);
+    show(k.pr.book, W.bw[2]);
+    show(k.pr.wand, 1 - W.bw[2]);
+    show(k.pr.can, W.bw[3]);
+    if (k.pr.can && W.bw[3] > 0.01) k.drops.forEach((d, i) => { const u = (t * 1.6 + i / 3) % 1; d.setAttribute("cx", f1(30 + 10 * u)); d.setAttribute("cy", f1(22 + 26 * u * u)); });
   }
 
   /* =====================================================================
@@ -312,6 +332,7 @@
   const flicker = document.getElementById("flicker");
   const spot = document.getElementById("spot");
   const svgStage = document.getElementById("stage");
+  const sign = document.getElementById("sign");
   let spotX = 310;
 
   birdsG.innerHTML = [0, 1, 2, 3].map(() => `<path d=""/>`).join("");
@@ -334,14 +355,14 @@
       b.setAttribute("d", `M${f1(x - 14)} ${f1(y)}Q${f1(x - 7)} ${f1(y - fl)} ${f1(x)} ${f1(y)}Q${f1(x + 7)} ${f1(y - fl)} ${f1(x + 14)} ${f1(y)}`);
     });
 
-    const grow = smooth(0.3, 0.42, p);
-    flowerG.setAttribute("opacity", f1(W.B));
-    set(flowerG, `translate(585 522) scale(${f1(Math.max(0.001, grow))})`);
+    const grow = smooth(0.32, 0.37, p);
+    flowerG.setAttribute("opacity", f1(clamp(W.bw[3] + W.bw[4] + W.bw[5])));
+    set(flowerG, `translate(690 522) scale(${f1(Math.max(0.001, grow))})`);
 
-    leavesG.setAttribute("opacity", f1(W.B));
+    leavesG.setAttribute("opacity", f1(W.bw[4]));
     leaves.forEach((l, i) => {
       const fall = (t * 42 + i * 47) % 260;
-      const x = 805 + ((i * 37) % 90) - 30 + 14 * Math.sin(t * 1.8 + i);
+      const x = 690 + ((i * 37) % 90) - 30 + 14 * Math.sin(t * 1.8 + i);
       set(l, `translate(${f1(x)} ${f1(270 + fall)}) rotate(${f1(t * 80 + i * 40)})`);
     });
 
@@ -349,7 +370,7 @@
     flicker.setAttribute("opacity", f1(0.02 + 0.05 * fl));
 
     /* nella scena B la luce segue chi recita: lettura, albero, scopa, lente */
-    const targets = [310, 830, 675, 550];
+    const targets = [500, 735, 650, 720];
     const sub = clamp(Math.floor((p - 0.25) / 0.0625), 0, 3);
     spotX = lerp(spotX, targets[sub], reduced ? 1 : 0.08);
     spot.setAttribute("cx", f1(spotX));
@@ -408,31 +429,37 @@
     const top = story.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: top + parseFloat(b.dataset.pt) * (story.offsetHeight - window.innerHeight), behavior: reduced ? "auto" : "smooth" });
   }));
-  /* scorrimento automatico dei titoli di coda: parte da solo, si ferma col pulsante o appena si scorre a mano */
+  /* spettacolo automatico: dopo l'apertura del sipario la pagina scorre da sola a velocita' di lettura;
+     si ferma appena il visitatore scorre a mano e riparte col pulsante */
   const ctl = document.getElementById("credits-ctl");
   const ctlLabel = ctl.querySelector("span");
-  const CREDITS_SECONDS = 30;
-  let creditsPaused = reduced, scrollCarry = 0, inCredits = false;
-  const setPaused = (v) => {
-    creditsPaused = v;
-    ctl.classList.toggle("is-paused", v);
-    ctl.setAttribute("aria-pressed", String(v));
-    ctlLabel.textContent = v ? "Riprendi i titoli" : "Pausa";
+  const SPEED = (pt) => pt < STORY ? STORY / 46 : pt < ROLL[0] ? (ROLL[0] - STORY) / 6 : (ROLL[1] - ROLL[0]) / 30; // pt al secondo
+  let playing = false, ended = false, touched = false, scrollCarry = 0;
+  const setCtl = () => {
+    ctl.classList.toggle("is-paused", !playing);
+    ctl.setAttribute("aria-pressed", String(!playing));
+    ctlLabel.textContent = playing ? "Pausa" : ended ? "Rivedi lo spettacolo" : storyProgress() < 0.004 ? "Guarda lo spettacolo" : "Riprendi";
   };
-  setPaused(creditsPaused);
-  ctl.addEventListener("click", () => setPaused(!creditsPaused));
-  const userScroll = () => { if (inCredits && !creditsPaused) setPaused(true); };
+  const play = () => {
+    if (ended || storyProgress() >= ROLL[1] - 0.002) { ended = false; window.scrollTo({ top: story.offsetTop, behavior: "instant" }); }
+    playing = true; scrollCarry = 0; setCtl();
+  };
+  const pause = () => { if (playing) { playing = false; setCtl(); } };
+  ctl.addEventListener("click", () => (playing ? pause() : play()));
+  const userScroll = () => { touched = true; pause(); };
   window.addEventListener("wheel", userScroll, { passive: true });
   window.addEventListener("touchstart", (e) => { if (!ctl.contains(e.target)) userScroll(); }, { passive: true });
   window.addEventListener("keydown", (e) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(e.key) && e.target !== ctl) userScroll(); });
-  function autoCredits(pt, dt) {
-    const was = inCredits;
-    inCredits = pt >= DIM[1] - 0.005 && pt < ROLL[1];
-    ctl.classList.toggle("is-on", inCredits);
-    if (!was && inCredits && !reduced && pt < ROLL[0] + 0.01) setPaused(false); // ogni volta che si arriva ai titoli ripartono da soli
-    if (!inCredits || creditsPaused || dt <= 0) return;
+  document.querySelectorAll(".bar a, #acts-bar button").forEach((el) => el.addEventListener("click", pause));
+  /* parte da solo quando il sipario ha finito di aprirsi, se nessuno ha ancora toccato la pagina */
+  if (!reduced) setTimeout(() => { if (!touched && storyProgress() < 0.004) play(); }, 5600);
+  setCtl();
+  ctl.classList.add("is-on");
+  function autoPlay(pt, dt) {
+    if (!playing || dt <= 0) return;
+    if (pt >= ROLL[1] - 0.001) { playing = false; ended = true; setCtl(); return; }
     const span = story.offsetHeight - window.innerHeight;
-    scrollCarry += (ROLL[1] - ROLL[0]) * span / CREDITS_SECONDS * dt;
+    scrollCarry += SPEED(pt) * span * dt;
     const step = Math.floor(scrollCarry);
     if (step >= 1) { scrollCarry -= step; window.scrollBy({ top: step, behavior: "instant" }); }
   }
@@ -465,12 +492,15 @@
     lastT = t;
     const pt = storyProgress();
     drawEnding(pt);
-    autoCredits(pt, dt);
+    autoPlay(pt, dt);
     const p = clamp(pt / STORY);
     const cur = subs.find((s) => p >= s.from && p < s.to) || subs[subs.length - 1];
     if (cur !== lastSub) { subs.forEach((s) => s.el.classList.toggle("is-on", s === cur)); lastSub = cur; }
     const sB = smooth(0.22, 0.27, p), sC = smooth(0.47, 0.53, p), sD = smooth(0.73, 0.78, p);
-    const W = { A: 1 - sB, B: sB - sC, C: sC - sD, D: sD };
+    const W = { A: 1 - sB, B: sB - sC, C: sC - sD, D: sD, bw: beatWeights(p) };
+    const signDown = smooth(0.76, 0.8, p);
+    sign.setAttribute("transform", `translate(0 ${f1(-420 * (1 - signDown))}) rotate(${f1(1.5 * Math.sin(t * 1.3))} 500 0)`);
+    sign.setAttribute("opacity", signDown > 0.001 ? "1" : "0");
     drawDonkey(p, t, dt);
     KIDS.forEach((k) => drawPup(k, p, t, dt, W));
     drawScene(p, t, W);

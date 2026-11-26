@@ -61,6 +61,12 @@
           <g id="leaves" fill="#1A0906" stroke="#E3B04B" stroke-width="1.8"></g>
           <rect x="-20" y="521" width="1040" height="30" fill="#0E0503" stroke="none"/>
           <path d="M-10 522 Q250 518 500 522 T1010 521" fill="none" stroke="#EFE3CC" stroke-width="2.6"/>
+          <!-- cartello che scende dall'alto nell'ultima battuta: l'invito a diventare soci -->
+          <g id="sign" transform="translate(0 -420)" opacity="0">
+            <path d="M440 0V118M560 0V118" fill="none" stroke="#EFE3CC" stroke-width="2"/>
+            <path d="M392 116H608Q614 116 614 122V172Q614 178 608 178H392Q386 178 386 172V122Q386 116 392 116Z" fill="#E3B04B" stroke="#EFE3CC" stroke-width="2.6"/>
+            <text x="500" y="158" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="28" fill="#17100B" stroke="none">Unisciti a noi!</text>
+          </g>
           <g id="pups" fill="#1A0906" stroke="#EFE3CC" stroke-width="2.2"></g>
         </g>
         <rect id="flicker" x="-1000" y="-1200" width="3000" height="1740" fill="#000" opacity="0"/>
@@ -78,7 +84,7 @@
 
       <!-- invito a scorrere: compare a sipario aperto e sparisce appena si scende -->
       <div class="hint" id="hint" aria-hidden="true">
-        <span class="hint__text"><span class="hint__long">Scorri in giù per far partire lo spettacolo</span><span class="hint__short">Scorri in giù</span></span>
+        <span class="hint__text"><span class="hint__long">Lo spettacolo parte da solo, oppure scorri in giù</span><span class="hint__short">Parte da solo, o scorri</span></span>
         <svg class="hint__arrow" viewBox="0 0 24 24" width="22" height="22"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
 
@@ -121,7 +127,7 @@
       </ol>
     </nav>
 
-    <!-- i titoli di coda scorrono da soli; si fermano con questo pulsante o appena si scorre a mano -->
+    <!-- lo spettacolo scorre da solo; questo pulsante lo mette in pausa, lo riprende o lo fa rivedere -->
     <button class="credits-ctl" id="credits-ctl" type="button" aria-pressed="false">
       <svg class="ic-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
       <svg class="ic-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
