@@ -109,6 +109,15 @@ em { font-style: italic; font-weight: 400; }
   .acts-bar ol { position: relative; }
 }
 
+/* ---------- titoli di coda automatici ---------- */
+.credits-ctl { position: absolute; right: var(--edge); top: 84px; z-index: 9; display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 18px; border: 2px solid rgb(239 227 204 / 0.5); border-radius: 999px; background: rgb(5 3 2 / 0.7); color: var(--bone); font: 500 15px/1 var(--text); cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 400ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease); }
+.credits-ctl.is-on { opacity: 1; visibility: visible; }
+.credits-ctl:hover { border-color: var(--gold); color: var(--gold); }
+.credits-ctl .ic-play { display: none; }
+.credits-ctl.is-paused .ic-play { display: block; }
+.credits-ctl.is-paused .ic-pause { display: none; }
+.credits-ctl.is-paused { border-color: var(--gold); color: var(--gold); }
+
 /* ---------- invito a scorrere ---------- */
 .hint { position: absolute; left: 50%; bottom: clamp(16px, 3svh, 32px); z-index: 6; display: flex; align-items: center; gap: var(--s2); padding: 10px 14px 10px 20px; border-radius: 999px; background: var(--gold); color: var(--ink); font: 500 16px/1 var(--text); box-shadow: 0 8px 30px rgb(0 0 0 / 0.45); transform: translate(-50%, 12px); opacity: 0; pointer-events: none; transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
 .is-open .hint { opacity: 1; transform: translate(-50%, 0); transition-delay: 4600ms; }

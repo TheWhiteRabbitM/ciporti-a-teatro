@@ -408,6 +408,35 @@
     const top = story.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: top + parseFloat(b.dataset.pt) * (story.offsetHeight - window.innerHeight), behavior: reduced ? "auto" : "smooth" });
   }));
+  /* scorrimento automatico dei titoli di coda: parte da solo, si ferma col pulsante o appena si scorre a mano */
+  const ctl = document.getElementById("credits-ctl");
+  const ctlLabel = ctl.querySelector("span");
+  const CREDITS_SECONDS = 30;
+  let creditsPaused = reduced, scrollCarry = 0, inCredits = false;
+  const setPaused = (v) => {
+    creditsPaused = v;
+    ctl.classList.toggle("is-paused", v);
+    ctl.setAttribute("aria-pressed", String(v));
+    ctlLabel.textContent = v ? "Riprendi i titoli" : "Pausa";
+  };
+  setPaused(creditsPaused);
+  ctl.addEventListener("click", () => setPaused(!creditsPaused));
+  const userScroll = () => { if (inCredits && !creditsPaused) setPaused(true); };
+  window.addEventListener("wheel", userScroll, { passive: true });
+  window.addEventListener("touchstart", (e) => { if (!ctl.contains(e.target)) userScroll(); }, { passive: true });
+  window.addEventListener("keydown", (e) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(e.key) && e.target !== ctl) userScroll(); });
+  function autoCredits(pt, dt) {
+    const was = inCredits;
+    inCredits = pt >= DIM[1] - 0.005 && pt < ROLL[1];
+    ctl.classList.toggle("is-on", inCredits);
+    if (!was && inCredits && !reduced && pt < ROLL[0] + 0.01) setPaused(false); // ogni volta che si arriva ai titoli ripartono da soli
+    if (!inCredits || creditsPaused || dt <= 0) return;
+    const span = story.offsetHeight - window.innerHeight;
+    scrollCarry += (ROLL[1] - ROLL[0]) * span / CREDITS_SECONDS * dt;
+    const step = Math.floor(scrollCarry);
+    if (step >= 1) { scrollCarry -= step; window.scrollBy({ top: step, behavior: "instant" }); }
+  }
+
   function drawEnding(pt) {
     hint.classList.toggle("is-gone", pt > 0.006);
     drawActs(pt);
@@ -436,6 +465,7 @@
     lastT = t;
     const pt = storyProgress();
     drawEnding(pt);
+    autoCredits(pt, dt);
     const p = clamp(pt / STORY);
     const cur = subs.find((s) => p >= s.from && p < s.to) || subs[subs.length - 1];
     if (cur !== lastSub) { subs.forEach((s) => s.el.classList.toggle("is-on", s === cur)); lastSub = cur; }

@@ -121,6 +121,13 @@
       </ol>
     </nav>
 
+    <!-- i titoli di coda scorrono da soli; si fermano con questo pulsante o appena si scorre a mano -->
+    <button class="credits-ctl" id="credits-ctl" type="button" aria-pressed="false">
+      <svg class="ic-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      <svg class="ic-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
+      <span>Pausa</span>
+    </button>
+
     <!-- Fine: il sipario si richiude, le luci si abbassano e scorrono i titoli di coda -->
     <div class="dim" id="dim" aria-hidden="true"></div>
     <div class="credits" id="credits">
