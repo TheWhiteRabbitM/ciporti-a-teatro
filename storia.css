@@ -59,14 +59,47 @@
 .st-contatti a { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; text-decoration-thickness: 2px; }
 .st-foot { padding: var(--s6) var(--edge); text-align: center; font-size: 14px; color: rgb(239 227 204 / 0.55); background: #070403; }
 
-@media (max-width: 1080px) { .st .bar__nav a:not(.bar__cta) { display: inline; } .programma ol { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 1080px) { .st .bar__nav a:not(.bar__cta):not(.bar__give) { display: inline; } .programma ol { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 860px) {
   .st main { padding-top: 60px; }
-  .st .bar__nav a:not(.bar__cta) { display: none; }
+  .st .bar__nav a:not(.bar__cta):not(.bar__give) { display: none; }
   .atto { grid-template-columns: 1fr; gap: var(--s6); }
   .atto:nth-child(even) .vig { order: 0; }
-  .vig--hero { aspect-ratio: 640 / 420; }
   .programma ol { grid-template-columns: 1fr 1fr; }
   .programma li:last-child { grid-column: 1 / -1; }
 }
 @media (max-width: 420px) { .bar__cta { font-size: 15px; } }
+
+/* ---------- Sostienici ---------- */
+.dona { max-width: 1180px; margin: 0 auto; padding: clamp(56px, 11svh, 120px) var(--edge); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.dona__intro { display: grid; gap: var(--s4); }
+.dona__intro h2 { font-size: clamp(34px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.015em; }
+.dona__intro > p:not(.atto__label) { font-size: clamp(18px, 1.35vw, 20px); line-height: 1.65; color: rgb(239 227 204 / 0.86); }
+.dona__card { display: grid; gap: var(--s6); padding: clamp(24px, 3vw, 40px); background: #160806; box-shadow: 0 0 0 1px rgb(227 176 75 / 0.45), 0 30px 70px rgb(0 0 0 / 0.55); }
+.dona__rows { display: grid; gap: var(--s4); }
+.dona__rows div { display: grid; gap: 2px; }
+.dona__rows dt { font: italic 400 16px/1.3 var(--display); color: rgb(239 227 204 / 0.6); }
+.dona__rows dd { font-size: 18px; font-weight: 500; }
+.dona__iban { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); font: 600 clamp(19px, 1.8vw, 24px)/1.3 var(--display) !important; letter-spacing: 0.03em; color: var(--gold); }
+.dona__copy { min-height: 36px; padding: 0 var(--s4); border: 2px solid var(--gold); background: transparent; color: var(--gold); font: 500 15px/1 var(--text); cursor: pointer; }
+.dona__copy:hover { background: var(--gold); color: var(--ink); }
+.dona__wait { padding: var(--s4); border-left: 3px solid var(--gold); background: rgb(227 176 75 / 0.08); font-size: 17px; line-height: 1.55; }
+.dona__wait a, .modi a:not(.btn) { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.dona__note { font-size: 15px; color: rgb(239 227 204 / 0.65); }
+
+.usi, .modi { max-width: 1180px; margin: 0 auto; padding: clamp(48px, 9svh, 96px) var(--edge); border-top: 1px solid rgb(239 227 204 / 0.1); text-align: center; }
+.usi .programma__head, .modi .programma__head { margin-bottom: var(--s8); }
+.usi ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s8) var(--s10); text-align: left; }
+.usi li { display: grid; gap: var(--s2); padding-top: var(--s4); border-top: 2px solid var(--gold); }
+.usi b { font: 600 clamp(21px, 1.8vw, 26px)/1.15 var(--display); }
+.usi span { font-size: 17px; line-height: 1.55; color: rgb(239 227 204 / 0.78); }
+.usi__trasp { max-width: 62ch; margin: var(--s12) auto 0; font-size: 17px; line-height: 1.6; color: rgb(239 227 204 / 0.75); }
+.modi__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6); text-align: left; }
+.modi article { display: grid; grid-template-rows: auto 1fr auto; gap: var(--s4); padding: var(--s6); background: #160806; box-shadow: 0 0 0 1px rgb(239 227 204 / 0.12); }
+.modi h3 { margin: 0; font: 600 clamp(22px, 1.9vw, 28px)/1.1 var(--display); color: var(--bone); }
+.modi p { font-size: 16px; line-height: 1.55; color: rgb(239 227 204 / 0.78); }
+.modi .btn { justify-self: start; min-height: 44px; font-size: 16px; }
+
+@media (max-width: 1080px) { .modi__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .usi ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .dona { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .modi__grid, .usi ul { grid-template-columns: 1fr; } }

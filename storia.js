@@ -16,6 +16,7 @@
     + `${PC("M-3 41Q-15 44 -15 64L15 64Q15 44 3 41Z", LIGHT)}<path d="M-14 60Q-24 56 -18 48M14 60Q24 56 18 48" fill="none" stroke="${INK}" stroke-width="2.4"/>${star(0, 53, 0.42, CREAM)}</g>`;
   const POLE = `<g class="pr"><path d="M0 18L0 150" stroke="${INK}" stroke-width="3"/>${DOT(0, 152, 4, LIGHT)}</g>`;
 
+  const HEART = `<g class="pr"><path d="M0 28L0 52" stroke="${INK}" stroke-width="2.6"/><path d="M0 52C-22 62 -24 86 -11 86C-4 86 0 80 0 75C0 80 4 86 11 86C24 86 22 62 0 52Z" fill="#E4572E" stroke="${INK}" stroke-width="2.4"/><path d="M-9 76Q-12 68 -6 64" fill="none" stroke="${CREAM}" stroke-width="2" stroke-linecap="round"/></g>`;
   const NEUTRAL = { lean: 0, nod: 0, shF: 8, elF: 10, shB: -8, elB: 10, hipF: 0, kneeF: 0, hipB: 0, kneeB: 0, bob: 0 };
   const SIT = { hipF: 84, kneeF: 118, hipB: 74, kneeB: 120, bob: -36, lean: 4, shF: 22, elF: 50, shB: 18, elB: 40, nod: 8 };
   const HANDS = { shF: 72, elF: 4, shB: -58, elB: 4 };
@@ -49,6 +50,16 @@
         { look: "bea", x: 640, props: PROPS.wand, pose: WAVE, dir: -1 },
         { look: "leo", x: 770, props: "", pose: (t) => ({ shF: 140 + 8 * sn(t, 1.6), elF: 26, shB: 130 + 8 * sn(t, 1.6, 1), elB: 26 }), dir: -1 },
       ],
+    },
+    dono: { w: 1000, h: 420, floor: 384, scale: 0.92, spotX: 440, spotW: 400,
+      kids: [
+        { look: "mia", x: 230, props: "", pose: CLAP },
+        { look: "teo", x: 350, props: "", pose: CLAP },
+        { look: "bea", x: 480, props: HEART, pose: (t) => ({ shF: 162 + 6 * sn(t, 2.2), elF: 4, shB: -24, elB: 20, nod: -8 }) },
+        { look: "sole", x: 610, props: "", pose: CLAP, dir: -1 },
+      ],
+      donkey: { x: 790, dir: -1, s: 0.95 },
+      confetti: true,
     },
     prologo: { w: 640, h: 420, floor: 372, scale: 0.9, spotX: 280, spotW: 150,
       back: `<path d="M470 372V262" stroke="${INK}" stroke-width="3"/><path d="M412 204H528Q534 204 534 210V258Q534 264 528 264H412Q406 264 406 258V210Q406 204 412 204Z" fill="#4A2A1C" stroke="${INK}" stroke-width="2.6"/>`
@@ -174,7 +185,7 @@
     if (v.donkey) poseDonkey(v.donkey, v.sc, t);
     v.stars.forEach((s, i) => {
       const u = ((reduced ? 0.5 : t * 0.16) + i / v.stars.length) % 1;
-      const x = 120 + ((i * 97) % 400) + 14 * Math.sin(u * 6 + i);
+      const x = v.sc.w * 0.18 + ((i * 97) % (v.sc.w * 0.64)) + 14 * Math.sin(u * 6 + i);
       s.setAttribute("transform", `translate(${f2(x)} ${f2(60 + u * 310)}) rotate(${f2(u * 360 + i * 40)})`);
       s.setAttribute("opacity", f2(clamp(Math.min(u * 6, (1 - u) * 4))));
     });
