@@ -103,3 +103,51 @@
 @media (max-width: 1080px) { .modi__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .usi ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 860px) { .dona { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .modi__grid, .usi ul { grid-template-columns: 1fr; } }
+
+/* ---------- Archivio: mosaico, galleria, video ---------- */
+.ar-hero { padding-bottom: clamp(48px, 8svh, 96px); }
+.mosaico { width: min(1180px, 100%); margin: 0 auto; display: grid; gap: 10px; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(2, clamp(140px, 15vw, 210px)) clamp(130px, 13vw, 180px);
+  grid-template-areas: "a a a b c c" "a a a b d d" "e e f f g g"; }
+.tess { position: relative; overflow: hidden; padding: 0; border: 0; background: #160806; cursor: pointer; box-shadow: 0 0 0 1px rgb(227 176 75 / 0.45), 0 18px 40px rgb(0 0 0 / 0.5);
+  opacity: 0; transform: translateY(14px); animation: tess-in 900ms var(--ease) forwards; }
+.tess--a { grid-area: a; animation-delay: 100ms; } .tess--b { grid-area: b; animation-delay: 250ms; } .tess--c { grid-area: c; animation-delay: 400ms; }
+.tess--d { grid-area: d; animation-delay: 550ms; } .tess--e { grid-area: e; animation-delay: 700ms; } .tess--f { grid-area: f; animation-delay: 850ms; } .tess--g { grid-area: g; animation-delay: 1000ms; }
+.tess img, .tess video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(0.22) saturate(1.05) contrast(1.04); transition: filter 300ms var(--ease); }
+.tess img { animation: tess-zoom 18s ease-in-out infinite alternate; }
+.tess--c img { animation-delay: -6s; } .tess--d img { animation-delay: -11s; } .tess--g img { animation-delay: -3s; }
+.tess--b img { object-position: 50% 30%; } .tess--c img, .tess--g img { object-position: 50% 25%; }
+.tess span { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 12px 10px; text-align: left; font: italic 400 clamp(15px, 1.2vw, 18px)/1.2 var(--display); color: var(--bone); background: linear-gradient(transparent, rgb(11 7 5 / 0.85)); }
+.tess:hover img, .tess:hover video, .tess:focus-visible img, .tess:focus-visible video { filter: none; }
+@keyframes tess-in { to { opacity: 1; transform: none; } }
+@keyframes tess-zoom { from { transform: scale(1); } to { transform: scale(1.09); } }
+
+.ar-sez { max-width: 1180px; margin: 0 auto; padding: clamp(48px, 9svh, 96px) var(--edge); border-top: 1px solid rgb(239 227 204 / 0.1); text-align: center; }
+.ar-sez .programma__head { margin-bottom: var(--s8); }
+.galleria { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6); text-align: left; }
+.galleria button { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; border: 0; overflow: hidden; cursor: zoom-in; background: #160806; box-shadow: 0 0 0 1px rgb(227 176 75 / 0.35); }
+.galleria img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transition: transform 400ms var(--ease); }
+.galleria button:hover img { transform: scale(1.04); }
+.galleria p { margin-top: var(--s3); font: italic 400 17px/1.35 var(--display); color: rgb(239 227 204 / 0.78); }
+.ar-video { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s8); text-align: left; }
+.ar-video figure { margin: 0; display: grid; gap: var(--s3); scroll-margin-top: 90px; }
+.ar-video video { width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; box-shadow: 0 0 0 1px rgb(227 176 75 / 0.45), 0 24px 60px rgb(0 0 0 / 0.55); }
+.ar-video figcaption { display: grid; gap: 2px; }
+.ar-video b { font: 600 22px/1.2 var(--display); }
+.ar-video span { font-size: 16px; color: rgb(239 227 204 / 0.7); }
+.ar-ricordi { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; max-width: 20ch; text-wrap: balance; }
+
+.lb { width: min(1000px, 94vw); max-height: 94svh; padding: 0; border: 0; background: transparent; color: var(--bone); overflow: visible; }
+.lb::backdrop { background: rgb(7 4 3 / 0.92); }
+.lb figure { margin: 0; display: grid; gap: var(--s3); justify-items: center; }
+.lb img { max-width: 100%; max-height: 80svh; width: auto; box-shadow: 0 0 0 1px rgb(227 176 75 / 0.45); }
+.lb figcaption { font: italic 400 18px/1.35 var(--display); text-align: center; }
+.lb__btn { position: absolute; width: 48px; height: 48px; border: 2px solid var(--gold); background: rgb(11 7 5 / 0.8); color: var(--gold); font: 400 30px/1 var(--display); cursor: pointer; }
+.lb__btn:hover { background: var(--gold); color: var(--ink); }
+.lb__prev { left: -60px; top: 40%; } .lb__next { right: -60px; top: 40%; } .lb__close { right: -60px; top: 0; }
+
+@media (max-width: 1080px) { .galleria { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lb__prev { left: 6px; } .lb__next { right: 6px; } .lb__close { right: 6px; top: 6px; } }
+@media (max-width: 860px) {
+  .mosaico { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 46vw 44vw 30vw 30vw 46vw; grid-template-areas: "a a" "b c" "b d" "e g" "f f"; gap: 8px; }
+  .ar-video { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .tess { opacity: 1; transform: none; animation: none; } .tess img { animation: none; } }
